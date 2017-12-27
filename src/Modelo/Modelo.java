@@ -3,19 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package contratacion;
+package Modelo;
 
 /**
  *
  * @author Duoc UC
  */
-public class Contraracion {
+public class Modelo {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public Modelo() {
     }
+    
+    
     
 }

@@ -1,14 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo;
 
-/**
- *
- * @author Duoc UC
- */
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 public class sql {
-    
+    Connection conectar=null;
+    public Connection conectar(){
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            conectar=DriverManager.getConnection(""
+                    + "jdbc:mysql://duocsql.mysql.database.azure.com/examen","german@duocsql","#Loquesea2008");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return conectar;
+    }
 }
