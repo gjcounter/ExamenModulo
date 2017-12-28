@@ -196,101 +196,10 @@ public class Modelo {
         }
         return res;
     }
-        
-    //consulta1
-   /*
-public boolean Consulta1(int codigo, String nombre, int precio, String formato4k){
-        if( valida_datos(codigo, nombre, precio) ) {
-            //Se arma la consulta
-            String q=" INSERT INTO taller3.pelicula(codigo,id_categoria,nombre,precio,formato4k) "
-                    + "VALUES ( '" + codigo + "',5,'"+ nombre +"','" + precio +"','" + formato4k +"');"; // 5 -> CATEGORIA DRAMA
-            //se ejecuta la consulta
-            try {
-                PreparedStatement pstm = conectara.conectar().prepareStatement(q);
-                pstm.execute();
-                pstm.close();
-                return true;
-            }catch(SQLException e){
-                System.err.println( e.getMessage() );
-            }
-            return false;
-        }
-        else
-        return false;
-    }
     
-    //consulta 2
-     public boolean Consulta2(int codigo, String nombre, int precio, String formato4k){
-        if( valida_datos(codigo, nombre, precio) ) {
-            //Se arma la consulta
-            String q=" INSERT INTO taller3.pelicula(codigo,id_categoria,nombre,precio,formato4k) "
-                    + "VALUES ( '" + codigo + "',6,'"+ nombre +"','" + precio +"','" + formato4k +"');"; // 6 -> CATEGORIA COMEDIA
-            //se ejecuta la consulta
-            try {
-                PreparedStatement pstm = conectara.conectar().prepareStatement(q);
-                pstm.execute();
-                pstm.close();
-                return true;
-            }catch(SQLException e){
-                System.err.println( e.getMessage() );
-            }
-            return false;
-        }
-        else
-        return false;
-    }
-     
-     public DefaultTableModel Consulta4(){
-     DefaultTableModel tablemodel = new DefaultTableModel();
-     int registros = 0;
-     String[] columNames = {"Código","Nombre","Categoría","Precio","Calidad 4k"};
-     try{
-        PreparedStatement pstm = conectara.conectar().prepareStatement( "SELECT count(*) as total FROM taller3.pelicula WHERE id_categoria = 7;"); //7 = romance
-        ResultSet res = pstm.executeQuery();
-        res.next();
-        registros = res.getInt("total");
-        res.close();
-     }catch(SQLException e){
-        System.err.println( e.getMessage() );
-     }
-     Object[][] data = new String[registros][9];
-     try{
-        PreparedStatement pstm = conectara.conectar().prepareStatement("SELECT * FROM taller3.pelicula WHERE id_categoria = 7;");//7 = romance
-        ResultSet res = pstm.executeQuery();
-        int i=0;
-        while(res.next()){
-               data[i][0] = res.getString( "codigo" );
-               data[i][1] = res.getString( "nombre" );
-               data[i][2] = nombre_categoria (Integer.parseInt(res.getString( "id_categoria" )));
-               data[i][3] = res.getString( "precio" );
-               data[i][4] = res.getString( "formato4k" );
-           i++;
-        }
-        res.close();
-        tablemodel.setDataVector(data, columNames );
-        }catch(SQLException e){
-           System.err.println( e.getMessage() );
-       }
-       return tablemodel;
-   }
-    
-    public boolean Consulta5(){
-        boolean res=false;
-        String q = " DELETE FROM taller3.pelicula WHERE precio > 2000; " ;
-        try {
-            PreparedStatement pstm = conectara.conectar().prepareStatement(q);
-            if (pstm.executeUpdate() == 1){
-                res=true;
-            }
-            pstm.close();
-         }catch(SQLException e){
-            System.err.println( e.getMessage() );
-        }
-        return res;
-    }
-    
-    public boolean Consulta6(){
-        String q= "UPDATE taller3.pelicula set nombre = REPLACE(nombre, nombre, CONCAT('P', nombre)) WHERE codigo > 0;";
+    //consulta 4 -> aumentar sueldos en 10%
+    public boolean aumentar_10(){
+        String q= "UPDATE examen.empleados set sueldo_bruto = sueldo_bruto*1.1";
         try {
             PreparedStatement pstm = conectara.conectar().prepareStatement(q);
             pstm.execute();
@@ -302,5 +211,4 @@ public boolean Consulta1(int codigo, String nombre, int precio, String formato4k
         }
         
     }
-*/
 }

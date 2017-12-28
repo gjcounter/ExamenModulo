@@ -42,15 +42,8 @@ public class Controlador implements ActionListener,MouseListener {
         boton_modificar,
         boton_limpiar,
         boton_redes,
-        boton_bruto
-        /*
-        boton_consulta1,
-        boton_consulta2,
-        boton_consulta3,
-        boton_consulta4,
-        boton_consulta5,
-        boton_consulta6,
-        */
+        boton_bruto,
+        boton_aumentar
     }
 
     public Controlador() {
@@ -89,6 +82,8 @@ public class Controlador implements ActionListener,MouseListener {
         interfazoperaciones.boton_redes.addActionListener(this);
         interfazoperaciones.boton_bruto.setActionCommand( "boton_bruto" );
         interfazoperaciones.boton_bruto.addActionListener(this);
+        interfazoperaciones.boton_aumentar.setActionCommand( "boton_aumentar" );
+        interfazoperaciones.boton_aumentar.addActionListener(this);
         
         //Interactuar con la tabla
         interfazmostrar.tabla.addMouseListener(this);
@@ -338,108 +333,13 @@ public class Controlador implements ActionListener,MouseListener {
                     JOptionPane.showMessageDialog(null, "No hay empleados con sueldo igual a 120000", "Error", JOptionPane.ERROR_MESSAGE);  
                }
             break;
-           // case boton_consulta1:
-               /*
-                //codigo
-                int codigoc1 = 0;
-                if (interfaznueva.tf_consultas_codigo.getText().length() > 0){
-                    codigoc1 = Integer.valueOf(interfaznueva.tf_consultas_codigo.getText());
-                }
-                
-                // nombre
-                String nombrec1 = interfaznueva.tf_consultas_nombre.getText();
-                
-                 //precio
-                int precioc1 = 0;
-                if (interfaznueva.tf_consultas_precio.getText().length() > 0){
-                    precioc1 = Integer.valueOf(interfaznueva.tf_consultas_precio.getText());
-                }
-                         
-                //formato4k              
-                String formatoc1 = "S";
-                if (interfaznueva.radio_consultas_no.isSelected()){
-                    formatoc1 = "N";
-                }
-                
-                //si estan llenos todos los campos ejecutamos la query
-                if (codigoc1 > 0 &&
-                    nombrec1.length() > 0 &&
-                    precioc1 > 0) {
-                    // int codigo, int categoria, String nombre, int precio, String formato4k 
-                    // hacer la query
-                    this.modelo.Consulta1(codigoc1,nombrec1,precioc1,formatoc1);
-                    JOptionPane.showMessageDialog(null, "Se ha agregado un registro nuevo", "Consulta 1", JOptionPane.OK_OPTION);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Por favor llenar todos los campos", "Error", JOptionPane.WARNING_MESSAGE);
-                }
-                interfazmostrar.tabla.setModel(this.modelo.mostrar());
-                
-                //System.out.println("Boton1");
-                */
-            //break;
-            //case boton_consulta2:
-                /*// stuff
-                 //codigo
-                int codigoc2 = 0;
-                if (interfaznueva.tf_consultas_codigo.getText().length() > 0){
-                    codigoc2 = Integer.valueOf(interfaznueva.tf_consultas_codigo.getText());
-                }
-                
-                // nombre
-                String nombrec2 = interfaznueva.tf_consultas_nombre.getText();
-                
-                 //precio
-                int precioc2 = 0;
-                if (interfaznueva.tf_consultas_precio.getText().length() > 0){
-                    precioc2 = Integer.valueOf(interfaznueva.tf_consultas_precio.getText());
-                }
-                         
-                //formato4k              
-                String formatoc2 = "S";
-                if (interfaznueva.radio_consultas_no.isSelected()){
-                    formatoc2 = "N";
-                }
-                
-                //si estan llenos todos los campos ejecutamos la query
-                if (codigoc2 > 0 &&
-                    nombrec2.length() > 0 &&
-                    precioc2 > 0) {
-
-                    // hacer la query
-                    this.modelo.Consulta2(codigoc2,nombrec2,precioc2,formatoc2);
-                    JOptionPane.showMessageDialog(null, "Se ha agregado un registro nuevo", "Consulta 2", JOptionPane.OK_OPTION);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Por favor llenar todos los campos", "Error", JOptionPane.WARNING_MESSAGE);
-                }
-                interfazmostrar.tabla.setModel(this.modelo.mostrar());
-                 //System.out.println("Boton2");
-                */
-           // break;
-            
-           // case boton_consulta4:
-                // stuff
-            /*    interfazmostrar.setVisible(true);
-                interfazmostrar.tabla.setModel(this.modelo.Consulta4());
-                */
-           // break;
-            //case boton_consulta5:
-            /*    if (this.modelo.Consulta5()==true){
-                JOptionPane.showMessageDialog(null, "Se han eliminado las peliculas con precio mayor a $2000", "Consulta 5", JOptionPane.OK_OPTION);
-                } else {
-                JOptionPane.showMessageDialog(null, "No se han eliminado peliculas", "Error", JOptionPane.WARNING_MESSAGE);
-                } */
-           // break;
-           // case boton_consulta6:
-           /*     if (this.modelo.Consulta6()==true){
-                JOptionPane.showMessageDialog(null, "Se ha agregado una P en cada nombre", "Consulta 6", JOptionPane.OK_OPTION);
-                interfazmostrar.setVisible(true);
-                interfazmostrar.tabla.setModel(this.modelo.mostrar());
-                } else {
-                JOptionPane.showMessageDialog(null, "Hubo un error de conexión", "Error", JOptionPane.WARNING_MESSAGE);
-                }
-                */
-           // break;
-            
+            case boton_aumentar:
+                if (modelo.aumentar_10()){
+                   JOptionPane.showMessageDialog(null, "Se han aumentado los sueldos en 10%", "Modificar Sueldos", JOptionPane.INFORMATION_MESSAGE);
+               } else {
+                    JOptionPane.showMessageDialog(null, "No se han modificado los sueldos", "Error", JOptionPane.ERROR_MESSAGE);  
+               }
+            break; 
         }  
     }
     
@@ -456,7 +356,6 @@ public class Controlador implements ActionListener,MouseListener {
                 data[i][0] = res.getString( "codigo" );
                 data[i][1] = res.getString( "nombre" );
                 data[i][2] = res.getString( "apellido" );
-               // data[i][3] = nombre_categoria (Integer.parseInt(res.getString( "id_categoria" )));
                 data[i][3] = res.getString( "rut" );
                 data[i][4] = res.getString( "celular" );
                 data[i][5] = res.getString( "email" );
