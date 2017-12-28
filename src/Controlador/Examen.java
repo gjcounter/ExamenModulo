@@ -15,10 +15,7 @@ public class Examen {
     
     public static void main(String[] args) {
         
-        new Controlador().iniciar();
-        sql asdf = new sql();
-        asdf.conectar();
-        
+        new Controlador().iniciar();        
         
     }
     

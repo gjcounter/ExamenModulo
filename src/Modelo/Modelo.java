@@ -140,8 +140,7 @@ public class Modelo {
         }
         return tablemodel;
     }
-    
-    
+        
     //consulta1
    /*
 public boolean Consulta1(int codigo, String nombre, int precio, String formato4k){
