@@ -196,26 +196,6 @@ public class Controlador implements ActionListener,MouseListener {
                     }
                 }
 
-
-                /*
-                // CHEQUEAMOS REGLAS DE NEGOCIO
-                if (categoriapelicula.equals("Categoría")){
-                    JOptionPane.showMessageDialog(null, "Debe seleccionar una categorìa", "Error", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    if (preciopelicula < 1000){
-                        JOptionPane.showMessageDialog(null, "El precio de la película debe ser al menos de 1000", "Error", JOptionPane.WARNING_MESSAGE);
-                    } else {
-                        if (nombrepelicula.length()<3){
-                            JOptionPane.showMessageDialog(null, "El nombre debe tener al menos 3 caracteres", "Error", JOptionPane.WARNING_MESSAGE);
-                        } else {
-                            if (codigopelicula < 10000 || codigopelicula > 99999) {
-                             JOptionPane.showMessageDialog(null, "El código debe estar entre 10000 y 99999", "Error", JOptionPane.WARNING_MESSAGE);
-                            } else {
-                                
-                            }
-                        }
-                    }
-                }*/
             break;
             case boton_eliminar:
                if (interfazeliminar.tf_eliminar.getText().length() > 0){
@@ -241,53 +221,100 @@ public class Controlador implements ActionListener,MouseListener {
                 
             break;
             case boton_modificar:
-               /*
-               //codigo
-                int modificarcodigo = 0;
-                if (interfazmostrar.tf_modificar_codigo.getText().length() > 0){
-                    modificarcodigo = Integer.valueOf(interfazmostrar.tf_modificar_codigo.getText());
+                //codigo
+                int codigoempleado1 = 0;
+                if (interfazmostrar.tf_codigo1.getText().length() > 0){
+                    codigoempleado1 = Integer.valueOf(interfazmostrar.tf_codigo1.getText());
                 }
                 
                 // nombre
-                String modificarnombre = interfazmostrar.tf_modificar_nombre.getText();
+                String nombreempleado1 = interfazmostrar.tf_nombre1.getText();
                 
-                 //precio
-                int modificarprecio = 0;
-                if (interfazmostrar.tf_modificar_precio.getText().length() > 0){
-                    modificarprecio = Integer.valueOf(interfazmostrar.tf_modificar_precio.getText());
+                // apellido
+                String apellidoempleado1 = interfazmostrar.tf_apellido1.getText();
+                
+                 //celular
+                int celularempleado1 = 0;
+                if (interfazmostrar.tf_celular1.getText().length() > 0){
+                    celularempleado1 = Integer.valueOf(interfazmostrar.tf_celular1.getText());
                 }
                 
-                //categoria
-                int modificaridcategoria = 1;
-                String modificarcategoria = interfazmostrar.cb_modificar_categoria.getSelectedItem().toString();
-                if (modificarcategoria.equals("Infantil")){
-                    modificaridcategoria = 2;
-                } else if (modificarcategoria.equals("Documental")){
-                     modificaridcategoria = 3;
-                } else if (modificarcategoria.equals("Musical")){
-                    modificaridcategoria = 4;
+                 //rut
+                String rutempleado1 = interfazmostrar.tf_rut1.getText();
+                
+                // email
+                String emailempleado1 = interfazmostrar.tf_email1.getText();
+                
+                //sueldobruto
+                int sueldoempleado1 = 0;
+                if (interfazmostrar.tf_sueldo1.getText().length() > 0){
+                    sueldoempleado1 = Integer.valueOf(interfazmostrar.tf_sueldo1.getText());
                 }
-            
-                //formato4k              
-                String modificarformato = "S";
-                if (interfazmostrar.radio_modificar_no.isSelected()){
-                    modificarformato = "N";
+                
+                //departamento
+                String departamentoempleado1 = null;
+                if (!interfazmostrar.combo_departamento1.getSelectedItem().toString().equals("Departamento")){
+                    departamentoempleado1 = interfazmostrar.combo_departamento1.getSelectedItem().toString();
                 }
+               
+                //estado civil
+                String estadocivilempleado1 = interfazmostrar.combo_estadocivil1.getSelectedItem().toString();
+                
+                //System.out.println(estadocivilempleado);
+                if (estadocivilempleado1.equals("Soltero")){
+                    estadocivilempleado1 = "S";
+                } else if (estadocivilempleado1.equals("Casado")){
+                     estadocivilempleado1 = "C";
+                } else if (estadocivilempleado1.equals("Viudo")){
+                    estadocivilempleado1 = "V";
+                } else {
+                    estadocivilempleado1 = null;
+                }
+                
                 
                 //si estan llenos todos los campos ejecutamos la query
-                if (modificarcategoria.equals("Categoría") == false &&
-                    modificarcodigo > 0 &&
-                    modificarnombre.length() > 0 &&
-                    modificarprecio > 0) {
-                    // int codigo, int categoria, String nombre, int precio, String formato4k 
+                
+                //agregar reglas de negocio
+                String textoerror1 = null;
+                if (departamentoempleado1 == null){
+                    textoerror1 = "Debe escoger un Departamento";
+                }
+                if (estadocivilempleado1 == null){
+                    textoerror1 = "Debe escoger un Estado Civil";
+                }
+                if (codigoempleado1 > 100 || codigoempleado1 <= 0){
+                    textoerror = "El código debe ser mayor a 0 y menor que 100";
+                }
+                if (interfazmostrar.tf_celular1.getText().length() != 9){
+                    textoerror1 = "El celular debe contener 9 dígitos";
+                }
+                if (sueldoempleado1 < 120000){
+                    textoerror1 = "El sueldo debe ser mayor a 120000";
+                }
+                
+                
+                if (departamentoempleado1 != null &&
+                    estadocivilempleado1 != null &&
+                    codigoempleado1 > 0 &&
+                    sueldoempleado1 > 0 &&
+                    nombreempleado1.length() > 0 &&
+                    apellidoempleado1.length() > 0 &&
+                    celularempleado1 > 0 &&
+                    emailempleado1.length() > 0 &&
+                    rutempleado1.length() > 0) {
                     // hacer la query
-                    this.modelo.modificar(modificarcodigo,modificaridcategoria,modificarnombre,modificarprecio,modificarformato);
-                    JOptionPane.showMessageDialog(null, "Se ha modificado el registro", "Modificar Pelìcula", JOptionPane.OK_OPTION);
+                    // int codigo, String rut, String nombre, String apellido, int celular, String email, int sueldo, String estadocivil, String departamento
+                    this.modelo.modificar(codigoempleado1, rutempleado1, nombreempleado1, apellidoempleado1, celularempleado1, emailempleado1, sueldoempleado1, estadocivilempleado1, departamentoempleado1);
+                    JOptionPane.showMessageDialog(null, "Se ha modificado el registro", "Modificar Empleado", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Por favor llenar todos los campos", "Error", JOptionPane.WARNING_MESSAGE);
+                    if (textoerror1 == null){
+                        JOptionPane.showMessageDialog(null, "Por favor llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, textoerror1, "Error", JOptionPane.ERROR_MESSAGE);          
+                    }
                 }
                 interfazmostrar.tabla.setModel(this.modelo.mostrar());
-              */
+                
             break;
             case boton_consulta1:
                /*
@@ -413,36 +440,35 @@ public class Controlador implements ActionListener,MouseListener {
                 /*
                 data[i][0] = res.getString( "codigo" );
                 data[i][1] = res.getString( "nombre" );
-                data[i][2] = nombre_categoria (Integer.parseInt(res.getString( "id_categoria" )));
-                data[i][3] = res.getString( "precio" );
-                data[i][4] = res.getString( "formato4k" );
-                */
-               /* 
-                interfazmostrar.tf_modificar_codigo.setText(String.valueOf(interfazmostrar.tabla.getValueAt(fila, 0) ));
-                interfazmostrar.tf_modificar_nombre.setText(String.valueOf(interfazmostrar.tabla.getValueAt(fila, 1) ));                
-                */
+                data[i][2] = res.getString( "apellido" );
+               // data[i][3] = nombre_categoria (Integer.parseInt(res.getString( "id_categoria" )));
+                data[i][3] = res.getString( "rut" );
+                data[i][4] = res.getString( "celular" );
+                data[i][5] = res.getString( "email" );
+                data[i][6] = res.getString( "sueldo_bruto" );
+                data[i][7] = res.getString( "est_civil" );
+                data[i][8] = res.getString( "nom_depto" );
+               */ 
+               
+                interfazmostrar.tf_codigo1.setText(String.valueOf(interfazmostrar.tabla.getValueAt(fila, 0) ));
+                interfazmostrar.tf_nombre1.setText(String.valueOf(interfazmostrar.tabla.getValueAt(fila, 1) ));
+                interfazmostrar.tf_apellido1.setText(String.valueOf(interfazmostrar.tabla.getValueAt(fila, 2) )); 
+                interfazmostrar.tf_rut1.setText(String.valueOf(interfazmostrar.tabla.getValueAt(fila, 3) ));
+                interfazmostrar.tf_celular1.setText(String.valueOf(interfazmostrar.tabla.getValueAt(fila, 4) ));
+                interfazmostrar.tf_email1.setText(String.valueOf(interfazmostrar.tabla.getValueAt(fila, 5) ));
+                interfazmostrar.tf_sueldo1.setText(String.valueOf(interfazmostrar.tabla.getValueAt(fila, 6) ));
                 
-                int selectedindex = 0;
-                if (interfazmostrar.tabla.getValueAt(fila, 2).toString().equals("Largometraje")){
-                     selectedindex = 1;
-                } else if (interfazmostrar.tabla.getValueAt(fila, 2).toString().equals("Infantil")){
-                   selectedindex = 2; 
-                } else if (interfazmostrar.tabla.getValueAt(fila, 2).toString().equals("Documental")){
-                    selectedindex = 3;
-                } else if (interfazmostrar.tabla.getValueAt(fila, 2).toString().equals("Musical")){
-                    selectedindex = 4;
+                /* estado civil */
+                if (interfazmostrar.tabla.getValueAt(fila, 7).equals("S")){
+                    interfazmostrar.combo_estadocivil1.setSelectedItem("Soltero");
+                } else if (interfazmostrar.tabla.getValueAt(fila, 7).equals("V")) {
+                    interfazmostrar.combo_estadocivil1.setSelectedItem("Viudo");
+                }  else if (interfazmostrar.tabla.getValueAt(fila, 7).equals("C")) {
+                    interfazmostrar.combo_estadocivil1.setSelectedItem("Casado");
                 }
-                /*
-                interfazmostrar.cb_modificar_categoria.setSelectedIndex(selectedindex);
-                interfazmostrar.tf_modificar_precio.setText(String.valueOf(interfazmostrar.tabla.getValueAt(fila, 3) ));
-                if (interfazmostrar.tabla.getValueAt(fila, 4).toString().equals("S")){
-                    interfazmostrar.radio_modificar_si.setSelected(true);
-                    interfazmostrar.radio_modificar_no.setSelected(false);
-                } else {
-                    interfazmostrar.radio_modificar_no.setSelected(true);
-                    interfazmostrar.radio_modificar_si.setSelected(false);
-                }
-                */
+                
+                /* DEPARTAMENTO */
+                interfazmostrar.combo_departamento1.setSelectedItem(interfazmostrar.tabla.getValueAt(fila, 8));
              }
         }
     
