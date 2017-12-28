@@ -48,6 +48,7 @@ public class InterfazAgregar extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         tf_sueldo = new javax.swing.JTextField();
         boton_guardar = new javax.swing.JButton();
+        boton_limpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -79,6 +80,13 @@ public class InterfazAgregar extends javax.swing.JFrame {
         boton_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boton_guardarActionPerformed(evt);
+            }
+        });
+
+        boton_limpiar.setText("Limpiar Casillas");
+        boton_limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_limpiarActionPerformed(evt);
             }
         });
 
@@ -124,7 +132,9 @@ public class InterfazAgregar extends javax.swing.JFrame {
                                     .addComponent(tf_sueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(boton_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(boton_guardar)))
                 .addContainerGap())
         );
@@ -171,7 +181,9 @@ public class InterfazAgregar extends javax.swing.JFrame {
                     .addComponent(tf_sueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(combo_estadocivil, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(boton_guardar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(boton_guardar)
+                    .addComponent(boton_limpiar))
                 .addContainerGap())
         );
 
@@ -182,10 +194,15 @@ public class InterfazAgregar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_boton_guardarActionPerformed
 
+    private void boton_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_limpiarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_limpiarActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton boton_guardar;
+    public javax.swing.JButton boton_limpiar;
     public javax.swing.JComboBox<String> combo_departamento;
     public javax.swing.JComboBox<String> combo_estadocivil;
     private javax.swing.JLabel jLabel1;

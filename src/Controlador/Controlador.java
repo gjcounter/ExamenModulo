@@ -39,13 +39,15 @@ public class Controlador implements ActionListener,MouseListener {
         boton_eliminar,
         boton_mostrar,
         boton_modificar,
+        boton_limpiar,
+        /*
         boton_consulta1,
         boton_consulta2,
         boton_consulta3,
         boton_consulta4,
         boton_consulta5,
         boton_consulta6,
-        boton_limpiar
+        */
     }
     
     
@@ -79,6 +81,8 @@ public class Controlador implements ActionListener,MouseListener {
         interfazmostrar.boton_mostrar.addActionListener(this);
         interfazmostrar.boton_modificar.setActionCommand( "boton_modificar" );
         interfazmostrar.boton_modificar.addActionListener(this);
+        interfazagregar.boton_limpiar.setActionCommand( "boton_limpiar" );
+        interfazagregar.boton_limpiar.addActionListener(this);
        /* interfaznueva.boton_consulta1.setActionCommand( "boton_consulta1" );
         interfaznueva.boton_consulta1.addActionListener(this);
         interfaznueva.boton_consulta2.setActionCommand( "boton_consulta2" );
@@ -89,8 +93,7 @@ public class Controlador implements ActionListener,MouseListener {
         interfaznueva.boton_consulta5.addActionListener(this);
         interfaznueva.boton_consulta6.setActionCommand( "boton_consulta6" );
         interfaznueva.boton_consulta6.addActionListener(this);
-        interfaznueva.boton_limpiar.setActionCommand( "boton_limpiar" );
-        interfaznueva.boton_limpiar.addActionListener(this);*/
+       */
         
         //Interactuar con la tabla
         interfazmostrar.tabla.addMouseListener(this);
@@ -316,7 +319,7 @@ public class Controlador implements ActionListener,MouseListener {
                 interfazmostrar.tabla.setModel(this.modelo.mostrar());
                 
             break;
-            case boton_consulta1:
+           // case boton_consulta1:
                /*
                 //codigo
                 int codigoc1 = 0;
@@ -354,8 +357,8 @@ public class Controlador implements ActionListener,MouseListener {
                 
                 //System.out.println("Boton1");
                 */
-            break;
-            case boton_consulta2:
+            //break;
+            //case boton_consulta2:
                 /*// stuff
                  //codigo
                 int codigoc2 = 0;
@@ -392,29 +395,33 @@ public class Controlador implements ActionListener,MouseListener {
                 interfazmostrar.tabla.setModel(this.modelo.mostrar());
                  //System.out.println("Boton2");
                 */
-            break;
+           // break;
             case boton_limpiar: // consulta 3
-            /*    //limpiar
-                interfaznueva.tf_consultas_codigo.setText(null);
-                interfaznueva.tf_consultas_nombre.setText(null);
-                interfaznueva.tf_consultas_precio.setText(null);
-                interfaznueva.tf_consultas_codigo.grabFocus();
-                */
+                interfazagregar.tf_apellido.setText(null);
+                interfazagregar.tf_celular.setText(null);
+                interfazagregar.tf_codigo.setText(null);
+                interfazagregar.tf_email.setText(null);
+                interfazagregar.tf_nombre.setText(null);
+                interfazagregar.tf_rut.setText(null);
+                interfazagregar.tf_sueldo.setText(null);
+                interfazagregar.combo_departamento.setSelectedIndex(0);
+                interfazagregar.combo_estadocivil.setSelectedIndex(0);
+                interfazagregar.tf_codigo.grabFocus();
             break;
-            case boton_consulta4:
+           // case boton_consulta4:
                 // stuff
             /*    interfazmostrar.setVisible(true);
                 interfazmostrar.tabla.setModel(this.modelo.Consulta4());
                 */
-            break;
-            case boton_consulta5:
+           // break;
+            //case boton_consulta5:
             /*    if (this.modelo.Consulta5()==true){
                 JOptionPane.showMessageDialog(null, "Se han eliminado las peliculas con precio mayor a $2000", "Consulta 5", JOptionPane.OK_OPTION);
                 } else {
                 JOptionPane.showMessageDialog(null, "No se han eliminado peliculas", "Error", JOptionPane.WARNING_MESSAGE);
                 } */
-            break;
-            case boton_consulta6:
+           // break;
+           // case boton_consulta6:
            /*     if (this.modelo.Consulta6()==true){
                 JOptionPane.showMessageDialog(null, "Se ha agregado una P en cada nombre", "Consulta 6", JOptionPane.OK_OPTION);
                 interfazmostrar.setVisible(true);
@@ -423,7 +430,7 @@ public class Controlador implements ActionListener,MouseListener {
                 JOptionPane.showMessageDialog(null, "Hubo un error de conexión", "Error", JOptionPane.WARNING_MESSAGE);
                 }
                 */
-            break;
+           // break;
             
         }  
     }
