@@ -100,40 +100,104 @@ public class Controlador implements ActionListener,MouseListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch ( Accion.valueOf( e.getActionCommand() ) ){
-            case boton_guardar:
-            /*   //GUARDAR NUEVA PELICULA              
+            case boton_guardar:             
                 //codigo
-                int codigopelicula = 0;
+                int codigoempleado = 0;
                 if (interfazagregar.tf_codigo.getText().length() > 0){
-                    codigopelicula = Integer.valueOf(interfazagregar.tf_codigo.getText());
+                    codigoempleado = Integer.valueOf(interfazagregar.tf_codigo.getText());
                 }
                 
                 // nombre
-                String nombrepelicula = interfazagregar.tf_nombre.getText();
+                String nombreempleado = interfazagregar.tf_nombre.getText();
                 
-                 //precio
-                int preciopelicula = 0;
-                if (interfazagregar.tf_precio.getText().length() > 0){
-                    preciopelicula = Integer.valueOf(interfazagregar.tf_precio.getText());
+                // apellido
+                String apellidoempleado = interfazagregar.tf_apellido.getText();
+                
+                 //celular
+                int celularempleado = 0;
+                if (interfazagregar.tf_celular.getText().length() > 0){
+                    celularempleado = Integer.valueOf(interfazagregar.tf_celular.getText());
                 }
                 
-                //categoria
-                int idcategoria = 1;
-                String categoriapelicula = interfazagregar.cb_categoria.getSelectedItem().toString();
-                if (categoriapelicula.equals("Infantil")){
-                    idcategoria = 2;
-                } else if (categoriapelicula.equals("Documental")){
-                     idcategoria = 3;
-                } else if (categoriapelicula.equals("Musical")){
-                    idcategoria = 4;
+                 //rut
+                String rutempleado = interfazagregar.tf_rut.getText();
+                
+                // email
+                String emailempleado = interfazagregar.tf_email.getText();
+                
+                //sueldobruto
+                int sueldoempleado = 0;
+                if (interfazagregar.tf_sueldo.getText().length() > 0){
+                    sueldoempleado = Integer.valueOf(interfazagregar.tf_sueldo.getText());
                 }
-            
-                //formato4k              
-                String formato4k = "S";
-                if (interfazagregar.radio_no.isSelected()){
-                    formato4k = "N";
+                
+                //departamento
+                String departamentoempleado = null;
+                if (!interfazagregar.combo_departamento.getSelectedItem().toString().equals("Departamento")){
+                    departamentoempleado = interfazagregar.combo_departamento.getSelectedItem().toString();
+                }
+                //System.out.println(departamentoempleado);
+               
+                //estado civil
+                String estadocivilempleado = interfazagregar.combo_estadocivil.getSelectedItem().toString();
+                
+                //System.out.println(estadocivilempleado);
+                if (estadocivilempleado.equals("Soltero")){
+                    estadocivilempleado = "S";
+                } else if (estadocivilempleado.equals("Casado")){
+                     estadocivilempleado = "C";
+                } else if (estadocivilempleado.equals("Viudo")){
+                    estadocivilempleado = "V";
+                } else {
+                    estadocivilempleado = null;
+                }
+                //System.out.println(estadocivilempleado);
+                
+                
+                //si estan llenos todos los campos ejecutamos la query
+                
+                //agregar reglas de negocio
+                String textoerror = null;
+                if (departamentoempleado == null){
+                    textoerror = "Debe escoger un Departamento";
+                }
+                if (estadocivilempleado == null){
+                    textoerror = "Debe escoger un Estado Civil";
+                }
+                if (codigoempleado > 100 || codigoempleado <= 0){
+                    textoerror = "El código debe ser mayor a 0 y menor que 100";
+                }
+                if (interfazagregar.tf_celular.getText().length() != 9){
+                    textoerror = "El celular debe contener 9 dígitos";
+                }
+                if (sueldoempleado < 120000){
+                    textoerror = "El sueldo debe ser mayor a 120000";
+                }
+                
+                
+                if (departamentoempleado != null &&
+                    estadocivilempleado != null &&
+                    codigoempleado > 0 &&
+                    sueldoempleado > 0 &&
+                    nombreempleado.length() > 0 &&
+                    apellidoempleado.length() > 0 &&
+                    celularempleado > 0 &&
+                    emailempleado.length() > 0 &&
+                    rutempleado.length() > 0) {
+                    // hacer la query
+                    // int codigo, String rut, String nombre, String apellido, int celular, String email, int sueldo, String estadocivil, String departamento
+                    this.modelo.agregar(codigoempleado, rutempleado, nombreempleado, apellidoempleado, celularempleado, emailempleado, sueldoempleado, estadocivilempleado, departamentoempleado);
+                    JOptionPane.showMessageDialog(null, "Se ha agregado el registro", "Agregar Empleado", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    if (textoerror == null){
+                        JOptionPane.showMessageDialog(null, "Por favor llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, textoerror, "Error", JOptionPane.ERROR_MESSAGE);          
+                    }
                 }
 
+
+                /*
                 // CHEQUEAMOS REGLAS DE NEGOCIO
                 if (categoriapelicula.equals("Categoría")){
                     JOptionPane.showMessageDialog(null, "Debe seleccionar una categorìa", "Error", JOptionPane.WARNING_MESSAGE);
@@ -147,47 +211,34 @@ public class Controlador implements ActionListener,MouseListener {
                             if (codigopelicula < 10000 || codigopelicula > 99999) {
                              JOptionPane.showMessageDialog(null, "El código debe estar entre 10000 y 99999", "Error", JOptionPane.WARNING_MESSAGE);
                             } else {
-                                //si estan llenos todos los campos ejecutamos la query
-                                if (categoriapelicula.equals("Categoría") == false &&
-                                    codigopelicula > 0 &&
-                                    nombrepelicula.length() > 0 &&
-                                    preciopelicula > 0) {
-                                    // hacer la query
-                                    // int codigo, int categoria, String nombre, int precio, String formato4k
-                                    this.modelo.agregar(codigopelicula, idcategoria, nombrepelicula, preciopelicula, formato4k);
-                                    JOptionPane.showMessageDialog(null, "Se ha agregado el registro", "Agregar Película", JOptionPane.OK_OPTION);
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "Por favor llenar todos los campos", "Error", JOptionPane.WARNING_MESSAGE);
-                                }
+                                
                             }
                         }
                     }
-                }
-*/
+                }*/
             break;
             case boton_eliminar:
-            /*    if (interfazeliminar.tf_eliminar.getText().length() > 0){
+               if (interfazeliminar.tf_eliminar.getText().length() > 0){
                     //asdf
                    if(this.modelo.eliminar(Integer.valueOf(interfazeliminar.tf_eliminar.getText())) == true) {
                        //eliminado
-                       JOptionPane.showMessageDialog(null, "Se ha eliminado el registro", "Pelicula Eliminada", JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null, "Se ha eliminado el empleado "+interfazeliminar.tf_eliminar.getText(), "Empleado Eliminado", JOptionPane.INFORMATION_MESSAGE);
                    } else {
-                       JOptionPane.showMessageDialog(null, "No existe una película con ese código", "Error", JOptionPane.WARNING_MESSAGE);
+                       JOptionPane.showMessageDialog(null, "No existe un empleado con ese código", "Error", JOptionPane.WARNING_MESSAGE);
                    }
                 }
-                */
             break;
             case boton_mostrar:
-            /*    if (interfazmostrar.tf_buscar.getText().length() > 0){
+                if (interfazmostrar.tf_buscar.getText().length() > 0){
                     //aa
                     interfazmostrar.tabla.setModel(this.modelo.buscar(Integer.valueOf(interfazmostrar.tf_buscar.getText())));
                     if (this.modelo.buscar(Integer.valueOf(interfazmostrar.tf_buscar.getText())).getValueAt(0, 0) == null){
-                        JOptionPane.showMessageDialog(null, "No existe una película con ese código", "Error", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "No existe una emplado con ese código", "Error", JOptionPane.WARNING_MESSAGE);
                     }
                 } else {
                     interfazmostrar.tabla.setModel(this.modelo.mostrar());
                 }
-                */
+                
             break;
             case boton_modificar:
                /*

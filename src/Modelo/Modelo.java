@@ -66,7 +66,7 @@ public class Modelo {
       int registros = 0;
       String[] columNames = {"Código","Nombre","Apellido","Rut","Celular","Email", "Sueldo", "Estado Civil", "Departamento"};
       try{
-         PreparedStatement pstm = conectara.conectar().prepareStatement( "SELECT count(*) as total FROM examen.empleados");
+         PreparedStatement pstm = conectara.conectar().prepareStatement( "SELECT count(*) as total FROM examen.empleados WHERE codigo ="+codigo+";");
          ResultSet res = pstm.executeQuery();
          
          res.next();
