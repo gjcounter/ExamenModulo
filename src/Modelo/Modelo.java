@@ -180,6 +180,22 @@ public class Modelo {
         }
         return tablemodel;
     }
+    
+    //consulta 3 -> eliminar empleados con sueldo = 120000
+    public boolean eliminar_120(){
+        boolean res=false;
+        String q = " DELETE FROM examen.empleados WHERE sueldo_bruto = 120000; " ;
+        try {
+            PreparedStatement pstm = conectara.conectar().prepareStatement(q);
+            if (pstm.executeUpdate() == 1){
+                res=true;
+            }
+            pstm.close();
+         }catch(SQLException e){
+            System.err.println( e.getMessage() );
+        }
+        return res;
+    }
         
     //consulta1
    /*

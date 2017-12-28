@@ -41,7 +41,8 @@ public class Controlador implements ActionListener,MouseListener {
         boton_mostrar,
         boton_modificar,
         boton_limpiar,
-        boton_redes
+        boton_redes,
+        boton_bruto
         /*
         boton_consulta1,
         boton_consulta2,
@@ -51,8 +52,7 @@ public class Controlador implements ActionListener,MouseListener {
         boton_consulta6,
         */
     }
-    
-    
+
     public Controlador() {
          try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -87,6 +87,8 @@ public class Controlador implements ActionListener,MouseListener {
         interfazagregar.boton_limpiar.addActionListener(this);
         interfazoperaciones.boton_redes.setActionCommand( "boton_redes" );
         interfazoperaciones.boton_redes.addActionListener(this);
+        interfazoperaciones.boton_bruto.setActionCommand( "boton_bruto" );
+        interfazoperaciones.boton_bruto.addActionListener(this);
         
         //Interactuar con la tabla
         interfazmostrar.tabla.addMouseListener(this);
@@ -328,6 +330,13 @@ public class Controlador implements ActionListener,MouseListener {
                 interfazmostrar.setVisible(true);
                 interfazmostrar.tabla.setModel(this.modelo.mostrar_redes());
                 JOptionPane.showMessageDialog(null, "Mostrando empleados del departamento de Redes", "Mostrar Empleados", JOptionPane.INFORMATION_MESSAGE);
+            break;
+            case boton_bruto:
+               if (modelo.eliminar_120()){
+                   JOptionPane.showMessageDialog(null, "Se han eliminado los empleados", "Eliminar Empleado", JOptionPane.INFORMATION_MESSAGE);
+               } else {
+                    JOptionPane.showMessageDialog(null, "No hay empleados con sueldo igual a 120000", "Error", JOptionPane.ERROR_MESSAGE);  
+               }
             break;
            // case boton_consulta1:
                /*
