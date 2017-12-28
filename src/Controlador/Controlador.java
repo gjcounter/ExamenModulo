@@ -179,8 +179,12 @@ public class Controlador implements ActionListener,MouseListener {
                     rutempleado.length() > 0) {
                     // hacer la query
                     // int codigo, String rut, String nombre, String apellido, int celular, String email, int sueldo, String estadocivil, String departamento
-                    this.modelo.agregar(codigoempleado, rutempleado, nombreempleado, apellidoempleado, celularempleado, emailempleado, sueldoempleado, estadocivilempleado, departamentoempleado);
-                    JOptionPane.showMessageDialog(null, "Se ha agregado el registro", "Agregar Empleado", JOptionPane.INFORMATION_MESSAGE);
+                    if (this.modelo.agregar(codigoempleado, rutempleado, nombreempleado, apellidoempleado, celularempleado, emailempleado, sueldoempleado, estadocivilempleado, departamentoempleado)){
+                        JOptionPane.showMessageDialog(null, "Se ha agregado el registro", "Agregar Empleado", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El código debe ser único", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    
                 } else {
                     if (textoerror == null){
                         JOptionPane.showMessageDialog(null, "Por favor llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);

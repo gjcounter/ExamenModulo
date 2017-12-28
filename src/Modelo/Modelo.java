@@ -24,11 +24,12 @@ public class Modelo {
         //se ejecuta la consulta
         try {
             PreparedStatement pstm = conectara.conectar().prepareStatement(q);
-            pstm.execute();
-            pstm.close();
-            valor = true;
+            if (pstm.executeUpdate() == 1){
+                valor = true;
+            }
+                     
         }catch(SQLException e){
-            System.err.println( e.getMessage() );
+            //System.err.println( e.getMessage() );
         }
         return valor;
     }
