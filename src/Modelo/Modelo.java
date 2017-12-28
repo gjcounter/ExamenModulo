@@ -140,6 +140,46 @@ public class Modelo {
         }
         return tablemodel;
     }
+    
+    // consulta 2 -> mostrar empleados de redes
+    public DefaultTableModel mostrar_redes(){
+      DefaultTableModel tablemodel = new DefaultTableModel();
+      int registros = 0;
+      String[] columNames = {"Código","Nombre","Apellido","Rut","Celular","Email", "Sueldo", "Estado Civil", "Departamento"};
+      try{
+         PreparedStatement pstm = conectara.conectar().prepareStatement( "SELECT count(*) as total FROM examen.empleados WHERE nom_depto = 'Redes';");
+         ResultSet res = pstm.executeQuery();
+         res.next();
+         registros = res.getInt("total");
+         res.close();
+      }catch(SQLException e){
+         System.err.println( e.getMessage() );
+      }
+      Object[][] data = new String[registros][9];
+      try{
+         PreparedStatement pstm = conectara.conectar().prepareStatement("SELECT * FROM examen.empleados WHERE nom_depto = 'Redes';");
+         ResultSet res = pstm.executeQuery();
+         int i=0;
+         while(res.next()){ 
+                data[i][0] = res.getString( "codigo" );
+                data[i][1] = res.getString( "nombre" );
+                data[i][2] = res.getString( "apellido" );
+               // data[i][3] = nombre_categoria (Integer.parseInt(res.getString( "id_categoria" )));
+                data[i][3] = res.getString( "rut" );
+                data[i][4] = res.getString( "celular" );
+                data[i][5] = res.getString( "email" );
+                data[i][6] = res.getString( "sueldo_bruto" );
+                data[i][7] = res.getString( "est_civil" );
+                data[i][8] = res.getString( "nom_depto" );
+            i++;
+         }
+         res.close();
+         tablemodel.setDataVector(data, columNames );
+         }catch(SQLException e){
+            System.err.println( e.getMessage() );
+        }
+        return tablemodel;
+    }
         
     //consulta1
    /*

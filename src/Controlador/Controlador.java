@@ -10,6 +10,7 @@ import Vista.Interfaz;
 import Vista.InterfazAgregar;
 import Vista.InterfazEliminar;
 import Vista.InterfazMostrar;
+import Vista.InterfazOperaciones;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -29,7 +30,7 @@ public class Controlador implements ActionListener,MouseListener {
     public static InterfazAgregar interfazagregar = new InterfazAgregar();
     public static InterfazMostrar interfazmostrar = new InterfazMostrar();
     public static InterfazEliminar interfazeliminar = new InterfazEliminar();
-   // public static InterfazNueva interfaznueva = new InterfazNueva();
+    public static InterfazOperaciones interfazoperaciones = new InterfazOperaciones();
     
     //modelo
     private Modelo modelo = new Modelo();
@@ -40,6 +41,7 @@ public class Controlador implements ActionListener,MouseListener {
         boton_mostrar,
         boton_modificar,
         boton_limpiar,
+        boton_redes
         /*
         boton_consulta1,
         boton_consulta2,
@@ -58,12 +60,12 @@ public class Controlador implements ActionListener,MouseListener {
             SwingUtilities.updateComponentTreeUI(interfazagregar);
             SwingUtilities.updateComponentTreeUI(interfazmostrar);
             SwingUtilities.updateComponentTreeUI(interfazeliminar);
-          //  SwingUtilities.updateComponentTreeUI(interfaznueva);
+            SwingUtilities.updateComponentTreeUI(interfazoperaciones);
             this.interfaz.setTitle("Recursos Humanos");
             interfazagregar.setTitle("Agregar Empleado");
             interfazmostrar.setTitle("Buscar / Mostrar Empleados");
             interfazeliminar.setTitle("Eliminar Empleados");
-            //interfaznueva.setTitle("Interfaz de Consultas");
+            interfazoperaciones.setTitle("Interfaz de Consultas");
         } catch (UnsupportedLookAndFeelException ex) {}
           catch (ClassNotFoundException ex) {}
           catch (InstantiationException ex) {}
@@ -83,17 +85,8 @@ public class Controlador implements ActionListener,MouseListener {
         interfazmostrar.boton_modificar.addActionListener(this);
         interfazagregar.boton_limpiar.setActionCommand( "boton_limpiar" );
         interfazagregar.boton_limpiar.addActionListener(this);
-       /* interfaznueva.boton_consulta1.setActionCommand( "boton_consulta1" );
-        interfaznueva.boton_consulta1.addActionListener(this);
-        interfaznueva.boton_consulta2.setActionCommand( "boton_consulta2" );
-        interfaznueva.boton_consulta2.addActionListener(this);
-        interfaznueva.boton_consulta4.setActionCommand( "boton_consulta4" );
-        interfaznueva.boton_consulta4.addActionListener(this);
-        interfaznueva.boton_consulta5.setActionCommand( "boton_consulta5" );
-        interfaznueva.boton_consulta5.addActionListener(this);
-        interfaznueva.boton_consulta6.setActionCommand( "boton_consulta6" );
-        interfaznueva.boton_consulta6.addActionListener(this);
-       */
+        interfazoperaciones.boton_redes.setActionCommand( "boton_redes" );
+        interfazoperaciones.boton_redes.addActionListener(this);
         
         //Interactuar con la tabla
         interfazmostrar.tabla.addMouseListener(this);
@@ -319,6 +312,23 @@ public class Controlador implements ActionListener,MouseListener {
                 interfazmostrar.tabla.setModel(this.modelo.mostrar());
                 
             break;
+            case boton_limpiar: // consulta 3
+                interfazagregar.tf_apellido.setText(null);
+                interfazagregar.tf_celular.setText(null);
+                interfazagregar.tf_codigo.setText(null);
+                interfazagregar.tf_email.setText(null);
+                interfazagregar.tf_nombre.setText(null);
+                interfazagregar.tf_rut.setText(null);
+                interfazagregar.tf_sueldo.setText(null);
+                interfazagregar.combo_departamento.setSelectedIndex(0);
+                interfazagregar.combo_estadocivil.setSelectedIndex(0);
+                interfazagregar.tf_codigo.grabFocus();
+            break;
+            case boton_redes:
+                interfazmostrar.setVisible(true);
+                interfazmostrar.tabla.setModel(this.modelo.mostrar_redes());
+                JOptionPane.showMessageDialog(null, "Mostrando empleados del departamento de Redes", "Mostrar Empleados", JOptionPane.INFORMATION_MESSAGE);
+            break;
            // case boton_consulta1:
                /*
                 //codigo
@@ -396,18 +406,7 @@ public class Controlador implements ActionListener,MouseListener {
                  //System.out.println("Boton2");
                 */
            // break;
-            case boton_limpiar: // consulta 3
-                interfazagregar.tf_apellido.setText(null);
-                interfazagregar.tf_celular.setText(null);
-                interfazagregar.tf_codigo.setText(null);
-                interfazagregar.tf_email.setText(null);
-                interfazagregar.tf_nombre.setText(null);
-                interfazagregar.tf_rut.setText(null);
-                interfazagregar.tf_sueldo.setText(null);
-                interfazagregar.combo_departamento.setSelectedIndex(0);
-                interfazagregar.combo_estadocivil.setSelectedIndex(0);
-                interfazagregar.tf_codigo.grabFocus();
-            break;
+            
            // case boton_consulta4:
                 // stuff
             /*    interfazmostrar.setVisible(true);
